@@ -33,7 +33,16 @@ public class UIManager : MonoBehaviour
         WoodText.text = $"Дерево: {gm.Resources[ResourceType.Wood]}";
         PortionsText.text = $"Еда: {gm.Portions}";
         VillagersText.text = $"Люди: {vm.Villagers.Count}";
-        BuffText.text = gm.ActiveBuff == VillagerBuff.None ? "" : $"✨ {gm.ActiveBuff}";
+        BuffText.text = gm.ActiveBuff == VillagerBuff.None ? "" : $"{gm.ActiveBuff}";
+
+        EndDayButton.GetComponentInChildren<TMP_Text>().text = gm.Phase switch
+        {
+            GamePhase.Morning => "Уйти в лес",
+            GamePhase.Day     => "Вернуться в деревню",
+            GamePhase.Evening => "Завершить вечер",
+            GamePhase.Night   => "Рассвет",
+            _                 => "Далее"
+        };
     }
 
     void OnEndDayClicked() => GameManager.Instance.AdvancePhase();

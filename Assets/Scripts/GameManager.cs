@@ -7,7 +7,8 @@ public enum ResourceType
 {
     Wood,
     Berries, Mushrooms, Fish,
-    Meat, Roots, Herbs
+    Meat, Roots, Herbs,
+    Vegetables
 }
 
 public class GameManager : MonoBehaviour
@@ -42,85 +43,80 @@ public class GameManager : MonoBehaviour
         switch (Phase)
         {
             case GamePhase.Morning:
+                // Назначаем жителей — просто переходим в день
                 Phase = GamePhase.Day;
                 ActiveBuff = VillagerBuff.None;
+                Debug.Log("День начался — жители работают, ты в лесу");
                 break;
 
             case GamePhase.Day:
+                // Жители отработали день — собираем ресурсы
                 Phase = GamePhase.Evening;
                 CollectDayResources();
+                Debug.Log("Вечер — вернулись из леса, время готовить");
                 break;
 
             case GamePhase.Evening:
+                // Игрок приготовил еду — кормим жителей и идём в ночь
                 Phase = GamePhase.Night;
-                ProcessEvening();
+                FeedVillagers();
+                Debug.Log("Ночь наступила");
                 break;
 
             case GamePhase.Night:
                 Phase = GamePhase.Morning;
                 Day++;
+                ResetVillagerTasks();
                 Debug.Log($"=== День {Day} ===");
                 break;
         }
-
-        Debug.Log($"Фаза: {Phase}");
+        BackgroundManager.Instance?.UpdateBackground(Phase);
         UIManager.Instance?.RefreshHUD();
     }
+    void ResetVillagerTasks()
+    {
+        foreach (var v in VillagerManager.Instance.Villagers)
+            v.AssignTask(VillagerTask.Idle);
+
+        foreach (var zone in FindObjectsByType<WorkZone>(FindObjectsInactive.Exclude))
+            zone.ResetZone();
+    }
+    
 
     void CollectDayResources()
     {
-        int wood = VillagerManager.Instance.CollectResources(VillagerTask.Wood);
-        int food = VillagerManager.Instance.CollectResources(VillagerTask.Food);
+        var vm = VillagerManager.Instance;
+        var collected = vm.ProcessTasks();
 
-        Resources[ResourceType.Wood] += wood;
-        Resources[ResourceType.Berries] += food;
+        Resources[ResourceType.Wood] += collected.Wood;
+        Resources[ResourceType.Vegetables] += collected.Vegetables;
+        Resources[ResourceType.Meat] += collected.Meat;
+        Resources[ResourceType.Berries] += collected.Berries;
+        Resources[ResourceType.Mushrooms] += collected.Mushrooms;
+        Resources[ResourceType.Herbs] += collected.Herbs;
 
-        Debug.Log($"Собрано: дерево +{wood}, ягоды +{food}");
+        // Кухня даёт порции напрямую
+        int kitchenPortions = vm.ProcessKitchen();
+        Portions += kitchenPortions;
+
+        Debug.Log($"Ресурсы собраны. Кухня: +{kitchenPortions} порций");
     }
 
-    void ProcessEvening()
+    void FeedVillagers()
     {
-        VillagerManager.Instance.ProcessEndOfDay(Portions);
+        var vm = VillagerManager.Instance;
+        int villagerCount = vm.Villagers.Count;
+        int consumed = Mathf.Min(Portions, villagerCount);
 
-        int consumed = Mathf.Min(Portions, VillagerManager.Instance.Villagers.Count);
+        Debug.Log($"=== КОРМЁЖКА === порций: {Portions}, жителей: {villagerCount}, съедено: {consumed}");
+
+        vm.ProcessEndOfDay(Portions);
         Portions -= consumed;
 
-        Debug.Log($"Съедено порций: {consumed}, осталось: {Portions}");
+        Debug.Log($"Осталось порций: {Portions}, живых жителей: {vm.Villagers.Count}");
 
-        if (VillagerManager.Instance.Villagers.Count == 0)
+        if (vm.Villagers.Count == 0)
             Debug.Log("Все жители погибли. Игра окончена.");
-    }
-
-    public bool TryCook(List<ResourceType> ingredients)
-    {
-        foreach (var ing in ingredients)
-        {
-            if (Resources[ing] <= 0)
-            {
-                Debug.Log($"Не хватает: {ing}");
-                return false;
-            }
-        }
-
-        foreach (var ing in ingredients)
-            Resources[ing]--;
-
-        var recipe = RecipeBook.Instance.FindRecipe(ingredients);
-
-        if (recipe != null)
-        {
-            Portions += recipe.Portions;
-            ActiveBuff = recipe.BuffType;
-            Debug.Log($"Приготовлено: {recipe.Name} +{recipe.Portions} порций. {recipe.Buff}");
-        }
-        else
-        {
-            Portions += 1;
-            Debug.Log("Похлёбка. +1 порция");
-        }
-
-        UIManager.Instance?.RefreshHUD();
-        return true;
     }
 
     public void AddResource(ResourceType type, int amount)

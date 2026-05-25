@@ -30,8 +30,86 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7864844608102633843}
+  - {fileID: 6536588381378408641}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2702349491743244593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6536588381378408641}
+  - component: {fileID: 235705462485738574}
+  - component: {fileID: 7262589916266497068}
+  m_Layer: 0
+  m_Name: UIControllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6536588381378408641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702349491743244593}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5273996425072452436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &235705462485738574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702349491743244593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4040f3790d472314d89b9211583d831b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CauldronUI
+  Panel: {fileID: 0}
+  IngredientsContainer: {fileID: 0}
+  IngredientButtonPrefab: {fileID: 4937082373028416838, guid: 88a3a1f6dffe5cb4a9f8d729b1c6e51b, type: 3}
+  SlotImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  SlotLabels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CookButton: {fileID: 0}
+  CloseButton: {fileID: 0}
+--- !u!114 &7262589916266497068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702349491743244593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4714a87ada5b1044fa8896fd9d099cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  DayText: {fileID: 0}
+  PhaseText: {fileID: 0}
+  WoodText: {fileID: 0}
+  PortionsText: {fileID: 0}
+  VillagersText: {fileID: 0}
+  BuffText: {fileID: 0}
+  EndDayButton: {fileID: 0}
 --- !u!1 &3655507622547021749
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,6 +121,8 @@ GameObject:
   - component: {fileID: 7864844608102633843}
   - component: {fileID: 3603899122045068970}
   - component: {fileID: 9108066641110130156}
+  - component: {fileID: 4856261733100105242}
+  - component: {fileID: 2811430130653052106}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -79,9 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   Day: 1
   Phase: 0
-  Wood: 5
-  Food: 4
-  Meat: 0
+  Portions: 0
+  ActiveBuff: 0
 --- !u!114 &9108066641110130156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,3 +173,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b90fd0a7af4d34ba52e4d8f10a09a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VillagerManager
+--- !u!114 &4856261733100105242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655507622547021749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a6a350b5a9c53440aa469976637bfbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeBook
+--- !u!114 &2811430130653052106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655507622547021749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51c625e279857245a56abe39eb34060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundManager
+  Morning: {fileID: 5077747799854214864, guid: 8b29b2236ae2a8f4c9d37f7c86c6a32a, type: 3}
+  Day: {fileID: 1347743237290855014, guid: ede0fdc6f21aaf5439c0388b764dc04d, type: 3}
+  Evening: {fileID: -1503037486005907397, guid: dc643c101d2830543b1881ae5a6910d8, type: 3}
+  Night: {fileID: -6226291403574386959, guid: cc0851bdf75aa8e44ac0fbbe82120465, type: 3}
+  BackgroundImage: {fileID: 0}

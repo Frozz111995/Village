@@ -40,6 +40,13 @@ public class RecipeBook : MonoBehaviour
             Buff = "+выносливость в вылазке",
             BuffType = VillagerBuff.ExpeditionBonus
         },
+        new Recipe {
+            Name = "Овощной суп",
+            Ingredients = new[] { ResourceType.Vegetables, ResourceType.Herbs },
+            Portions = 2,
+            Buff = "+1 день без голода",
+            BuffType = VillagerBuff.None
+        },
     };
 
     void Awake() => Instance = this;

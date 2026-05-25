@@ -12,7 +12,15 @@ public class Villager
         HP = MaxHP;
     }
 
-    public void Feed() { }
+    public void Feed()
+    {
+        if (HP < MaxHP)
+        {
+            HP += 1;
+            UnityEngine.Debug.Log($"{Name} поел, HP: {HP}");
+        }
+    }
+    
 
     public void Starve()
     {
