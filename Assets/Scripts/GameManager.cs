@@ -43,23 +43,24 @@ public class GameManager : MonoBehaviour
         switch (Phase)
         {
             case GamePhase.Morning:
-                // Назначаем жителей — просто переходим в день
                 Phase = GamePhase.Day;
                 ActiveBuff = VillagerBuff.None;
+                ForestManager.Instance.EnterForest();
                 Debug.Log("День начался — жители работают, ты в лесу");
                 break;
 
             case GamePhase.Day:
-                // Жители отработали день — собираем ресурсы
                 Phase = GamePhase.Evening;
                 CollectDayResources();
+                ForestManager.Instance.ExitForest();
+                ForestManager.Instance.CauldronButton.SetActive(true);
                 Debug.Log("Вечер — вернулись из леса, время готовить");
                 break;
 
             case GamePhase.Evening:
-                // Игрок приготовил еду — кормим жителей и идём в ночь
                 Phase = GamePhase.Night;
                 FeedVillagers();
+                ForestManager.Instance.CauldronButton.SetActive(false);
                 Debug.Log("Ночь наступила");
                 break;
 
@@ -70,18 +71,10 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"=== День {Day} ===");
                 break;
         }
+
         BackgroundManager.Instance?.UpdateBackground(Phase);
         UIManager.Instance?.RefreshHUD();
     }
-    void ResetVillagerTasks()
-    {
-        foreach (var v in VillagerManager.Instance.Villagers)
-            v.AssignTask(VillagerTask.Idle);
-
-        foreach (var zone in FindObjectsByType<WorkZone>(FindObjectsInactive.Exclude))
-            zone.ResetZone();
-    }
-    
 
     void CollectDayResources()
     {
@@ -95,7 +88,6 @@ public class GameManager : MonoBehaviour
         Resources[ResourceType.Mushrooms] += collected.Mushrooms;
         Resources[ResourceType.Herbs] += collected.Herbs;
 
-        // Кухня даёт порции напрямую
         int kitchenPortions = vm.ProcessKitchen();
         Portions += kitchenPortions;
 
@@ -117,6 +109,15 @@ public class GameManager : MonoBehaviour
 
         if (vm.Villagers.Count == 0)
             Debug.Log("Все жители погибли. Игра окончена.");
+    }
+
+    void ResetVillagerTasks()
+    {
+        foreach (var v in VillagerManager.Instance.Villagers)
+            v.AssignTask(VillagerTask.Idle);
+
+        foreach (var zone in FindObjectsByType<WorkZone>(FindObjectsInactive.Exclude))
+            zone.ResetZone();
     }
 
     public void AddResource(ResourceType type, int amount)

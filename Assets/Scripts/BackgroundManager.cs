@@ -18,10 +18,11 @@ public class BackgroundManager : MonoBehaviour
 
     public void UpdateBackground(GamePhase phase)
     {
+        if (phase == GamePhase.Day) return;
+
         BackgroundImage.sprite = phase switch
         {
             GamePhase.Morning => Morning,
-            GamePhase.Day     => Day,
             GamePhase.Evening => Evening,
             GamePhase.Night   => Night,
             _                 => Morning

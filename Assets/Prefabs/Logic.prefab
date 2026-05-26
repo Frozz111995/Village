@@ -109,6 +109,8 @@ MonoBehaviour:
   PortionsText: {fileID: 0}
   VillagersText: {fileID: 0}
   BuffText: {fileID: 0}
+  HintText: {fileID: 0}
+  ActionCounterText: {fileID: 0}
   EndDayButton: {fileID: 0}
 --- !u!1 &3655507622547021749
 GameObject:
@@ -123,6 +125,8 @@ GameObject:
   - component: {fileID: 9108066641110130156}
   - component: {fileID: 4856261733100105242}
   - component: {fileID: 2811430130653052106}
+  - component: {fileID: 3705400292620661794}
+  - component: {fileID: 3826893357902793755}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -202,3 +206,55 @@ MonoBehaviour:
   Evening: {fileID: -1503037486005907397, guid: dc643c101d2830543b1881ae5a6910d8, type: 3}
   Night: {fileID: -6226291403574386959, guid: cc0851bdf75aa8e44ac0fbbe82120465, type: 3}
   BackgroundImage: {fileID: 0}
+--- !u!114 &3705400292620661794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655507622547021749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924578b706dead94ab9cb4a01d488614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestManager
+  VillageRoot: {fileID: 0}
+  ForestRoot: {fileID: 0}
+  VillageBackground: {fileID: 0}
+  ForestBackground: {fileID: 0}
+  CauldronButton: {fileID: 0}
+  ActionCounter: {fileID: 0}
+--- !u!114 &3826893357902793755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655507622547021749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74635e056ce02c04fa1afe41a107baec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForestSpawner
+  SpawnArea: {fileID: 0}
+  ForestObjectPrefab: {fileID: 4305491007825871809, guid: 7a83e203f6364094f85d7156fb8a6bb6, type: 3}
+  SpawnCount: 8
+  MaxActions: 5
+  ResourceSizes:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  PossibleResources: 01000000020000000600000004000000050000000300000000000000
+  Weights: 1e00000019000000140000000a0000000a0000000a00000014000000
+  ResourceSprites:
+  - {fileID: -9037867413479587097, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
+  - {fileID: 1739033893264289485, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
+  - {fileID: -7902746824603708634, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
+  - {fileID: 6282711315228947375, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
+  - {fileID: 317433491243497808, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
+  - {fileID: -7161816923008937732, guid: 5c042c73c9edefd4081cb05fca299a3d, type: 3}
+  - {fileID: 3362759322703349181, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}

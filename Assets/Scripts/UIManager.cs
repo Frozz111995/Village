@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     public TMP_Text PortionsText;
     public TMP_Text VillagersText;
     public TMP_Text BuffText;
+    public TMP_Text HintText;
+    public TMP_Text ActionCounterText;
     public Button EndDayButton;
 
     void Awake() => Instance = this;
@@ -34,6 +36,18 @@ public class UIManager : MonoBehaviour
         PortionsText.text = $"Еда: {gm.Portions}";
         VillagersText.text = $"Люди: {vm.Villagers.Count}";
         BuffText.text = gm.ActiveBuff == VillagerBuff.None ? "" : $"{gm.ActiveBuff}";
+
+        HintText.text = gm.Phase switch
+        {
+            GamePhase.Morning => "Назначь жителей на работы",
+            GamePhase.Day     => "Собирай ресурсы, возвращайся до темноты",
+            GamePhase.Evening => "Приготовь еду в котле",
+            GamePhase.Night   => "Переживи ночь",
+            _                 => ""
+        };
+
+        if (gm.Phase == GamePhase.Day)
+            ActionCounterText.text = $"Действий: {ForestSpawner.Instance.ActionsLeft}/{ForestSpawner.Instance.MaxActions}";
 
         EndDayButton.GetComponentInChildren<TMP_Text>().text = gm.Phase switch
         {
