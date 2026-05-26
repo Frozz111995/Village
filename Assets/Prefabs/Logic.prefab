@@ -241,20 +241,28 @@ MonoBehaviour:
   SpawnCount: 8
   MaxActions: 5
   ResourceSizes:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - {x: 160, y: 160}
+  - {x: 120, y: 80}
+  - {x: 120, y: 120}
+  - {x: 170, y: 100}
+  - {x: 140, y: 140}
+  - {x: 250, y: 150}
+  - {x: 150, y: 300}
+  OutlineWidths:
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 15
+  - 2
   PossibleResources: 01000000020000000600000004000000050000000300000000000000
-  Weights: 1e00000019000000140000000a0000000a0000000a00000014000000
+  Weights: 0f000000140000000f0000000a0000000a0000000a0000003c000000
   ResourceSprites:
   - {fileID: -9037867413479587097, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
   - {fileID: 1739033893264289485, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
   - {fileID: -7902746824603708634, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
   - {fileID: 6282711315228947375, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
-  - {fileID: 317433491243497808, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
+  - {fileID: -8246648432109084162, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
   - {fileID: -7161816923008937732, guid: 5c042c73c9edefd4081cb05fca299a3d, type: 3}
   - {fileID: 3362759322703349181, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
