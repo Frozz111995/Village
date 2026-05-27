@@ -21,6 +21,7 @@ public class NightBattleManager : MonoBehaviour
     public float ArrowSpeed = 300f;
     public float ShootInterval = 1.5f;
     public int EnemiesPerWave = 3;
+    public float ShootRange = 400f; // <-- добавь
 
     private List<GameObject> _soldiers = new();
     private List<GameObject> _enemies = new();
@@ -116,7 +117,15 @@ public class NightBattleManager : MonoBehaviour
 
                 var target = GetNearestEnemy();
                 if (target != null)
-                    ShootArrow(soldier, target);
+                {
+                    float dist = Vector2.Distance(
+                        soldier.GetComponent<RectTransform>().position,
+                        target.GetComponent<RectTransform>().position
+                    );
+
+                    if (dist <= ShootRange)
+                        ShootArrow(soldier, target);
+                }
 
                 yield return new WaitForSeconds(ShootInterval);
             }

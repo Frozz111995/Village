@@ -641,6 +641,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1267812896}
     - target: {fileID: 1633686077978746704, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
+      propertyPath: ShootRange
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633686077978746704, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
       propertyPath: SoldierArea
       value: 
       objectReference: {fileID: 1805509458}
@@ -752,6 +756,14 @@ PrefabInstance:
       propertyPath: RestartButton
       value: 
       objectReference: {fileID: 1698289127}
+    - target: {fileID: 3603899122045068970, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
+      propertyPath: WallHP
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603899122045068970, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
+      propertyPath: MaxWallHP
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3612072624435420287, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
       propertyPath: NightRoot
       value: 

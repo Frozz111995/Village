@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -38,8 +39,7 @@ public class Enemy : MonoBehaviour
 
         if (_rt.position.x <= _manager.WallBoundary.GetWallX(_rt.position.y))
         {
-            SetAttacking(true);
-            _manager.OnEnemyReachedWall();
+            SetAttacking(true); // урон будет наноситься в AttackTarget()
         }
     }
 
@@ -81,6 +81,12 @@ public class Enemy : MonoBehaviour
         _attackTimer = 0f;
 
         _animator?.SetTrigger("Attack");
+        StartCoroutine(DealDamageWithDelay(0.5f));
+    }
+    
+    IEnumerator DealDamageWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
         if (_targetPike != null)
         {
@@ -94,6 +100,10 @@ public class Enemy : MonoBehaviour
                     SetAttacking(false);
                 }
             }
+        }
+        else
+        {
+            _manager.OnEnemyReachedWall();
         }
     }
 
