@@ -186,9 +186,10 @@ MonoBehaviour:
   WallHP: 5
   MaxWallHP: 5
   StakeCount: 0
-  MaxStakeCount: 10
+  MaxStakeCount: 7
   Portions: 0
   ActiveBuff: 0
+  IsGameOver: 0
 --- !u!114 &9108066641110130156
 MonoBehaviour:
   m_ObjectHideFlags: 0

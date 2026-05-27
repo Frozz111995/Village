@@ -30,7 +30,7 @@ public class Arrow : MonoBehaviour
         Vector2 dir = (targetPos - (Vector2)_rt.position).normalized;
         _rt.position += (Vector3)(dir * _speed * Time.deltaTime);
 
-        CheckHitAnyEnemy(); // проверяем всех врагов при каждом движении
+        CheckHitAnyEnemy();
 
         float dist = Vector2.Distance(_rt.position, targetPos);
         if (dist < 20f)
@@ -39,14 +39,17 @@ public class Arrow : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     void CheckHitAnyEnemy()
     {
         var enemies = FindObjectsByType<Enemy>(FindObjectsInactive.Exclude);
         foreach (var enemy in enemies)
         {
-            float dist = Vector2.Distance(_rt.position, enemy.GetComponent<RectTransform>().position);
-            if (dist < 30f)
+            RectTransform enemyRt = enemy.GetComponent<RectTransform>();
+            Vector2 enemyCenter = (Vector2)enemyRt.position + Vector2.up * enemyRt.rect.height / 2f;
+
+            float dist = Vector2.Distance(_rt.position, enemyCenter);
+            if (dist < 60f)
             {
                 enemy.TakeDamage(1);
                 Destroy(gameObject);
