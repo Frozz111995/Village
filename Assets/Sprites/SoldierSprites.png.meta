@@ -1,0 +1,515 @@
+fileFormatVersion: 2
+guid: c7b7f92fa8b068344a4c4d49cfeec1bd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6665261269547055105
+    second: wmremove-transformed (2)-Photoroom_0
+  - first:
+      213: 2725883048669267659
+    second: wmremove-transformed (2)-Photoroom_1
+  - first:
+      213: -6452078870766827066
+    second: wmremove-transformed (2)-Photoroom_2
+  - first:
+      213: -1953372976815911513
+    second: wmremove-transformed (2)-Photoroom_3
+  - first:
+      213: -7783320471929575167
+    second: wmremove-transformed (2)-Photoroom_4
+  - first:
+      213: 854926175644370417
+    second: wmremove-transformed (2)-Photoroom_5
+  - first:
+      213: -5745673203729007953
+    second: wmremove-transformed (2)-Photoroom_6
+  - first:
+      213: 446969988749637242
+    second: wmremove-transformed (2)-Photoroom_7
+  - first:
+      213: 5841795972931019331
+    second: wmremove-transformed (2)-Photoroom_8
+  - first:
+      213: 778503612116316001
+    second: wmremove-transformed (2)-Photoroom_9
+  - first:
+      213: -1102146285413312184
+    second: wmremove-transformed (2)-Photoroom_10
+  - first:
+      213: -9221535704824599811
+    second: wmremove-transformed (2)-Photoroom_11
+  - first:
+      213: 8269740589128323956
+    second: wmremove-transformed (2)-Photoroom_12
+  - first:
+      213: 1373704015221713108
+    second: wmremove-transformed (2)-Photoroom_13
+  - first:
+      213: 803894682704898367
+    second: wmremove-transformed (2)-Photoroom_14
+  - first:
+      213: -781150589252787390
+    second: wmremove-transformed (2)-Photoroom_15
+  - first:
+      213: -666424557693531493
+    second: wmremove-transformed (2)-Photoroom_16
+  - first:
+      213: -8657915344549603486
+    second: wmremove-transformed (2)-Photoroom_17
+  - first:
+      213: 3547098431798285132
+    second: wmremove-transformed (2)-Photoroom_18
+  - first:
+      213: 1001642495381915041
+    second: wmremove-transformed (2)-Photoroom_19
+  - first:
+      213: 1644892764934925017
+    second: wmremove-transformed (2)-Photoroom_20
+  - first:
+      213: -236263250558504651
+    second: wmremove-transformed (2)-Photoroom_21
+  - first:
+      213: 3465833394305498385
+    second: wmremove-transformed (2)-Photoroom_22
+  - first:
+      213: -6568159318851756256
+    second: wmremove-transformed (2)-Photoroom_23
+  - first:
+      213: 3379313834378422768
+    second: wmremove-transformed (2)-Photoroom_24
+  - first:
+      213: -3956739266590629376
+    second: wmremove-transformed (2)-Photoroom_25
+  - first:
+      213: 9079808812988693381
+    second: wmremove-transformed (2)-Photoroom_26
+  - first:
+      213: 3983703550027695467
+    second: wmremove-transformed (2)-Photoroom_27
+  - first:
+      213: 7549096321744709791
+    second: wmremove-transformed (2)-Photoroom_28
+  - first:
+      213: 7218721149729520650
+    second: wmremove-transformed (2)-Photoroom_29
+  - first:
+      213: -5549608437644136675
+    second: wmremove-transformed (2)-Photoroom_30
+  - first:
+      213: -2710826678451501978
+    second: wmremove-transformed (2)-Photoroom_31
+  - first:
+      213: -9134969816668113673
+    second: wmremove-transformed (2)-Photoroom_32
+  - first:
+      213: -7998798208388287312
+    second: wmremove-transformed (2)-Photoroom_33
+  - first:
+      213: 3313111361657989016
+    second: wmremove-transformed (2)-Photoroom_34
+  - first:
+      213: -7926628809162416742
+    second: wmremove-transformed (2)-Photoroom_35
+  - first:
+      213: 2750841181210714952
+    second: wmremove-transformed (2)-Photoroom_36
+  - first:
+      213: -3598118139563581965
+    second: wmremove-transformed (2)-Photoroom_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_10
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 851
+        width: 180
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8495c67fac364b0f0800000000000000
+      internalID: -1102146285413312184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_11
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 849
+        width: 180
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfa295e5226860080800000000000000
+      internalID: -9221535704824599811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_12
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 851
+        width: 180
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4739f97304504c270800000000000000
+      internalID: 8269740589128323956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_13
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 850
+        width: 180
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d861dd0680601310800000000000000
+      internalID: 1373704015221713108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_32
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 430
+        width: 290
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f4f493d9511a3180800000000000000
+      internalID: -9134969816668113673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_33
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 428
+        width: 290
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b43cfea86f8ef090800000000000000
+      internalID: -7998798208388287312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_34
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 426
+        width: 253
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8976fe4da398afd20800000000000000
+      internalID: 3313111361657989016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_35
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 42
+        width: 290
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9d1f7b5815fef190800000000000000
+      internalID: -7926628809162416742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_36
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 42
+        width: 290
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 843a49fca73fc2620800000000000000
+      internalID: 2750841181210714952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wmremove-transformed (2)-Photoroom_37
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 43
+        width: 243
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd5c6f9d9ae01ec0800000000000000
+      internalID: -3598118139563581965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a85a93dfb163f1d4a96bf70d0a137397
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      wmremove-transformed (2)-Photoroom_0: -6665261269547055105
+      wmremove-transformed (2)-Photoroom_1: 2725883048669267659
+      wmremove-transformed (2)-Photoroom_10: -1102146285413312184
+      wmremove-transformed (2)-Photoroom_11: -9221535704824599811
+      wmremove-transformed (2)-Photoroom_12: 8269740589128323956
+      wmremove-transformed (2)-Photoroom_13: 1373704015221713108
+      wmremove-transformed (2)-Photoroom_14: 803894682704898367
+      wmremove-transformed (2)-Photoroom_15: -781150589252787390
+      wmremove-transformed (2)-Photoroom_16: -666424557693531493
+      wmremove-transformed (2)-Photoroom_17: -8657915344549603486
+      wmremove-transformed (2)-Photoroom_18: 3547098431798285132
+      wmremove-transformed (2)-Photoroom_19: 1001642495381915041
+      wmremove-transformed (2)-Photoroom_2: -6452078870766827066
+      wmremove-transformed (2)-Photoroom_20: 1644892764934925017
+      wmremove-transformed (2)-Photoroom_21: -236263250558504651
+      wmremove-transformed (2)-Photoroom_22: 3465833394305498385
+      wmremove-transformed (2)-Photoroom_23: -6568159318851756256
+      wmremove-transformed (2)-Photoroom_24: 3379313834378422768
+      wmremove-transformed (2)-Photoroom_25: -3956739266590629376
+      wmremove-transformed (2)-Photoroom_26: 9079808812988693381
+      wmremove-transformed (2)-Photoroom_27: 3983703550027695467
+      wmremove-transformed (2)-Photoroom_28: 7549096321744709791
+      wmremove-transformed (2)-Photoroom_29: 7218721149729520650
+      wmremove-transformed (2)-Photoroom_3: -1953372976815911513
+      wmremove-transformed (2)-Photoroom_30: -5549608437644136675
+      wmremove-transformed (2)-Photoroom_31: -2710826678451501978
+      wmremove-transformed (2)-Photoroom_32: -9134969816668113673
+      wmremove-transformed (2)-Photoroom_33: -7998798208388287312
+      wmremove-transformed (2)-Photoroom_34: 3313111361657989016
+      wmremove-transformed (2)-Photoroom_35: -7926628809162416742
+      wmremove-transformed (2)-Photoroom_36: 2750841181210714952
+      wmremove-transformed (2)-Photoroom_37: -3598118139563581965
+      wmremove-transformed (2)-Photoroom_4: -7783320471929575167
+      wmremove-transformed (2)-Photoroom_5: 854926175644370417
+      wmremove-transformed (2)-Photoroom_6: -5745673203729007953
+      wmremove-transformed (2)-Photoroom_7: 446969988749637242
+      wmremove-transformed (2)-Photoroom_8: 5841795972931019331
+      wmremove-transformed (2)-Photoroom_9: 778503612116316001
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -68,12 +68,13 @@ public class NightBattleManager : MonoBehaviour
 
     void ActivatePikes()
     {
-        // Сначала выключаем все
+        // Чистим null из списка
+        Pikes.RemoveAll(p => p == null);
+    
         foreach (var p in Pikes) p.SetActive(false);
 
         int count = Mathf.Min(GameManager.Instance.StakeCount, Pikes.Count);
-    
-        // Перемешиваем список и включаем первые count
+
         List<GameObject> shuffled = new List<GameObject>(Pikes);
         for (int i = shuffled.Count - 1; i > 0; i--)
         {
@@ -124,6 +125,19 @@ public class NightBattleManager : MonoBehaviour
 
     void ShootArrow(GameObject soldier, GameObject target)
     {
+        var animator = soldier.GetComponent<Animator>();
+        if (animator != null)
+            animator.SetTrigger("Attack");
+
+        StartCoroutine(ShootWithDelay(soldier, target, 0.4f)); // 0.4f — подбери под анимацию
+    }
+
+    IEnumerator ShootWithDelay(GameObject soldier, GameObject target, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (soldier == null || target == null) yield break;
+
         var arrow = Instantiate(ArrowPrefab, SoldierArea.parent);
         arrow.GetComponent<RectTransform>().position = soldier.GetComponent<RectTransform>().position;
         arrow.GetComponent<Arrow>().Init(target, ArrowSpeed);

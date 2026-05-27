@@ -18,7 +18,8 @@ public class Pike : MonoBehaviour
         if (_hp <= 0)
         {
             GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 0.5f);
-            Destroy(gameObject, 0.5f);
+            gameObject.SetActive(false);
+            GameManager.Instance.StakeCount = Mathf.Max(0, GameManager.Instance.StakeCount - 1);
         }
         Debug.Log("Pikes hp = " + _hp);
     }

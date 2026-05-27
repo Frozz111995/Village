@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8437530178050240493}
   - component: {fileID: 4278380083389867796}
   - component: {fileID: 8943089267115852104}
+  - component: {fileID: 5816009910160566927}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1741968695968465899, guid: 0cee64cccfb92324d9a18d436a1d5b96, type: 3}
+  m_Sprite: {fileID: -1102146285413312184, guid: c7b7f92fa8b068344a4c4d49cfeec1bd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,5 +90,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 0, y: -5.08}
+  m_EffectDistance: {x: 0, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!95 &5816009910160566927
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713848644467767885}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b54964d8ec10fa944a96ee4f203df748, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

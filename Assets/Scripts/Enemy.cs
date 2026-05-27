@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     private NightBattleManager _manager;
     private RectTransform _rt;
+    private Animator _animator;
     private int _hp = 3;
     private bool _attacking = false;
     private GameObject _targetPike = null;
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     {
         _manager = manager;
         _rt = GetComponent<RectTransform>();
+        _animator = GetComponent<Animator>();
+        _animator?.SetBool("Walk", true);
         _initialized = true;
     }
 
@@ -35,7 +38,7 @@ public class Enemy : MonoBehaviour
 
         if (_rt.position.x <= _manager.WallBoundary.GetWallX(_rt.position.y))
         {
-            _attacking = true;
+            SetAttacking(true);
             _manager.OnEnemyReachedWall();
         }
     }
@@ -59,10 +62,16 @@ public class Enemy : MonoBehaviour
                 }
 
                 _targetPike = pike;
-                _attacking = true;
+                SetAttacking(true);
                 return;
             }
         }
+    }
+
+    void SetAttacking(bool value)
+    {
+        _attacking = value;
+        _animator?.SetBool("Walk", !value);
     }
 
     void AttackTarget()
@@ -70,6 +79,8 @@ public class Enemy : MonoBehaviour
         _attackTimer += Time.deltaTime;
         if (_attackTimer < _attackInterval) return;
         _attackTimer = 0f;
+
+        _animator?.SetTrigger("Attack");
 
         if (_targetPike != null)
         {
@@ -80,7 +91,7 @@ public class Enemy : MonoBehaviour
                 if (!pike.IsAlive)
                 {
                     _targetPike = null;
-                    _attacking = false;
+                    SetAttacking(false);
                 }
             }
         }
