@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<ResourceType, int> Resources = new();
     public int Portions = 0;
     public VillagerBuff ActiveBuff = VillagerBuff.None;
-
+    public bool IsGameOver = false;
     void Awake()
     {
         Instance = this;
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
             case GamePhase.Evening:
                 Phase = GamePhase.Night;
                 FeedVillagers();
+                if (IsGameOver) return;
                 ForestManager.Instance.CauldronButton.SetActive(false);
                 NightManager.Instance.EnterNight();
                 break;
@@ -111,7 +112,11 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Осталось порций: {Portions}, живых жителей: {vm.Villagers.Count}");
 
         if (vm.Villagers.Count == 0)
+        {
+            IsGameOver = true;
             GameOverUI.Instance.Show(Day);
+            return;
+        }
     }
 
     void ResetVillagerTasks()
