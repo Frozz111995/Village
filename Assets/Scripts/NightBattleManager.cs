@@ -25,7 +25,6 @@ public class NightBattleManager : MonoBehaviour
     private List<GameObject> _soldiers = new();
     private List<GameObject> _enemies = new();
     private List<GameObject> _arrows = new();
-    private List<GameObject> _pikes = new();
 
     private bool _battleActive = false;
     private int _enemiesDefeated = 0;
@@ -209,5 +208,5 @@ public class NightBattleManager : MonoBehaviour
         }
     }
 
-    public List<GameObject> GetPikes() => _pikes;
+    public List<GameObject> GetPikes() => Pikes; // вместо _pikes
 }

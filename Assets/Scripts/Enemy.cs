@@ -10,7 +10,8 @@ public class Enemy : MonoBehaviour
     private float _attackTimer = 0f;
     private float _attackInterval = 1f;
     private bool _initialized = false;
-    
+    private bool _pikeHitReceived = false;
+
     public void Init(NightBattleManager manager)
     {
         _manager = manager;
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (!_initialized) return;
-        
+
         if (_attacking)
         {
             AttackTarget();
@@ -41,12 +42,22 @@ public class Enemy : MonoBehaviour
 
     void CheckPikeCollision()
     {
-        foreach (var pike in _manager.GetPikes())
+        var pikes = _manager.GetPikes();
+
+        foreach (var pike in pikes)
         {
-            if (pike == null) continue;
+            if (pike == null || !pike.activeSelf) continue;
+
             float dist = Vector2.Distance(_rt.position, pike.GetComponent<RectTransform>().position);
-            if (dist < 40f)
+
+            if (dist < 60f)
             {
+                if (!_pikeHitReceived)
+                {
+                    _pikeHitReceived = true;
+                    pike.GetComponent<Pike>()?.DealDamageTo(this);
+                }
+
                 _targetPike = pike;
                 _attacking = true;
                 return;
@@ -80,5 +91,6 @@ public class Enemy : MonoBehaviour
         _hp -= dmg;
         if (_hp <= 0)
             _manager.OnEnemyDefeated(gameObject);
+        Debug.Log(this + " got damage, hp left  " + _hp);
     }
 }

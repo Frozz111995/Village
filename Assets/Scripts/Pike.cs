@@ -6,6 +6,12 @@ public class Pike : MonoBehaviour
     private int _hp = 2;
     public bool IsAlive => _hp > 0;
 
+    public void DealDamageTo(Enemy enemy)
+    {
+        Debug.Log("pike dealt damage");
+        enemy.TakeDamage(1);
+    }
+
     public void TakeDamage()
     {
         _hp--;
@@ -14,5 +20,6 @@ public class Pike : MonoBehaviour
             GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 0.5f);
             Destroy(gameObject, 0.5f);
         }
+        Debug.Log("Pikes hp = " + _hp);
     }
 }
