@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 7864844608102633843}
   - {fileID: 6536588381378408641}
+  - {fileID: 7408089452759139210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2702349491743244593
@@ -44,6 +45,7 @@ GameObject:
   - component: {fileID: 6536588381378408641}
   - component: {fileID: 235705462485738574}
   - component: {fileID: 7262589916266497068}
+  - component: {fileID: 2863166004164932579}
   m_Layer: 0
   m_Name: UIControllers
   m_TagString: Untagged
@@ -112,6 +114,22 @@ MonoBehaviour:
   HintText: {fileID: 0}
   ActionCounterText: {fileID: 0}
   EndDayButton: {fileID: 0}
+  WallHealthText: {fileID: 0}
+--- !u!114 &2863166004164932579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702349491743244593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca59f926cf3cdb498bcf4cb8196c5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
+  Panel: {fileID: 0}
+  DaysText: {fileID: 0}
+  RestartButton: {fileID: 0}
 --- !u!1 &3655507622547021749
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +145,8 @@ GameObject:
   - component: {fileID: 2811430130653052106}
   - component: {fileID: 3705400292620661794}
   - component: {fileID: 3826893357902793755}
+  - component: {fileID: 3612072624435420287}
+  - component: {fileID: 1633686077978746704}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -163,6 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   Day: 1
   Phase: 0
+  WallHP: 5
+  MaxWallHP: 5
+  StakeCount: 0
+  MaxStakeCount: 10
   Portions: 0
   ActiveBuff: 0
 --- !u!114 &9108066641110130156
@@ -201,10 +225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51c625e279857245a56abe39eb34060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackgroundManager
-  Morning: {fileID: 5077747799854214864, guid: 8b29b2236ae2a8f4c9d37f7c86c6a32a, type: 3}
-  Day: {fileID: 1347743237290855014, guid: ede0fdc6f21aaf5439c0388b764dc04d, type: 3}
-  Evening: {fileID: -1503037486005907397, guid: dc643c101d2830543b1881ae5a6910d8, type: 3}
-  Night: {fileID: -6226291403574386959, guid: cc0851bdf75aa8e44ac0fbbe82120465, type: 3}
+  Morning: {fileID: 21300000, guid: 8b29b2236ae2a8f4c9d37f7c86c6a32a, type: 3}
+  Day: {fileID: 21300000, guid: ede0fdc6f21aaf5439c0388b764dc04d, type: 3}
+  Evening: {fileID: 21300000, guid: dc643c101d2830543b1881ae5a6910d8, type: 3}
+  Night: {fileID: 21300000, guid: cc0851bdf75aa8e44ac0fbbe82120465, type: 3}
   BackgroundImage: {fileID: 0}
 --- !u!114 &3705400292620661794
 MonoBehaviour:
@@ -222,6 +246,8 @@ MonoBehaviour:
   ForestRoot: {fileID: 0}
   VillageBackground: {fileID: 0}
   ForestBackground: {fileID: 0}
+  VillagersCanvas: {fileID: 0}
+  EveningButtonsCanvas: {fileID: 0}
   CauldronButton: {fileID: 0}
   ActionCounter: {fileID: 0}
 --- !u!114 &3826893357902793755
@@ -264,5 +290,117 @@ MonoBehaviour:
   - {fileID: -7902746824603708634, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
   - {fileID: 6282711315228947375, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
   - {fileID: -8246648432109084162, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
-  - {fileID: -7161816923008937732, guid: 5c042c73c9edefd4081cb05fca299a3d, type: 3}
+  - {fileID: 21300000, guid: 5c042c73c9edefd4081cb05fca299a3d, type: 3}
   - {fileID: 3362759322703349181, guid: c0200c87f9758b748b2b1b6cefc98c49, type: 3}
+--- !u!114 &3612072624435420287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655507622547021749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95541d990bb72844ade581d24302e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightManager
+  NightRoot: {fileID: 0}
+  NightBackground: {fileID: 0}
+  VillageRoot: {fileID: 0}
+  VillageBackground: {fileID: 0}
+  VillagersCanvas: {fileID: 0}
+  EveningButtonsCanvas: {fileID: 0}
+--- !u!114 &1633686077978746704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655507622547021749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bf69dcd9f87c946a1ba7642851afc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightBattleManager
+  Soldiers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Pikes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  EnemyPrefab: {fileID: 1296029609031852382, guid: 9ea4d527465503d469314014f8c446f0, type: 3}
+  ArrowPrefab: {fileID: 115880712700745622, guid: 398674bb21f96d44897912c97024a7a1, type: 3}
+  SoldierArea: {fileID: 0}
+  EnemyArea: {fileID: 0}
+  WallBoundary: {fileID: 8157550677608598128}
+  ArrowSpeed: 300
+  ShootInterval: 1.5
+  EnemiesPerWave: 3
+--- !u!1 &6180488989966275082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7408089452759139210}
+  - component: {fileID: 8157550677608598128}
+  m_Layer: 0
+  m_Name: WallBoundary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7408089452759139210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6180488989966275082}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5273996425072452436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8157550677608598128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6180488989966275082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630a97c39f5905f44b2434b8f893b71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WallBoundary
+  Points:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

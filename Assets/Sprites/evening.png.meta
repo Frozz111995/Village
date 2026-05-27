@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 5c042c73c9edefd4081cb05fca299a3d
+guid: dc643c101d2830543b1881ae5a6910d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7161816923008937732
-    second: Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_0
-  - first:
-      213: 4561737276553346433
-    second: Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_1
-  - first:
-      213: -8681624462716410251
-    second: Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_2
-  - first:
-      213: 686620735149881130
-    second: Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_3
+      213: -1503037486005907397
+    second: b7f97779-c7c1-4259-8f32-4394ae8f1229 (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_0
+      name: b7f97779-c7c1-4259-8f32-4394ae8f1229 (1)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1376
-        height: 768
+        width: 1920
+        height: 1080
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cf0dba5147d1c9c90800000000000000
-      internalID: -7161816923008937732
+      spriteID: b309582be53242be0800000000000000
+      internalID: -1503037486005907397
       vertices: []
       indices: 
       edges: []
@@ -160,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 37283d66ed40fd943966bd633e6615b6
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -170,10 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_0: -7161816923008937732
-      Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_1: 4561737276553346433
-      Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_2: -8681624462716410251
-      Gemini_Generated_Image_kt57mukt57mukt57-Photoroom_3: 686620735149881130
+      b7f97779-c7c1-4259-8f32-4394ae8f1229 (1)_0: -1503037486005907397
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

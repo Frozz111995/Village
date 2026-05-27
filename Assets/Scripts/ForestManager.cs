@@ -8,6 +8,8 @@ public class ForestManager : MonoBehaviour
     public GameObject ForestRoot;
     public GameObject VillageBackground;
     public GameObject ForestBackground;
+    public GameObject VillagersCanvas;
+    public GameObject EveningButtonsCanvas;
 
     [Header("UI")]
     public GameObject CauldronButton;
@@ -18,18 +20,19 @@ public class ForestManager : MonoBehaviour
         Instance = this;
         CauldronButton.SetActive(false);
         ActionCounter.SetActive(false);
+        EveningButtonsCanvas.SetActive(false);
     }
 
     public void EnterForest()
     {
         VillageRoot.SetActive(false);
-        ForestRoot.SetActive(true);
         VillageBackground.SetActive(false);
+        ForestRoot.SetActive(true);
         ForestBackground.SetActive(true);
-
+        VillagersCanvas.SetActive(false);
+        EveningButtonsCanvas.SetActive(false);
         CauldronButton.SetActive(false);
         ActionCounter.SetActive(true);
-
         ForestSpawner.Instance.SpawnForest();
     }
 
@@ -39,7 +42,11 @@ public class ForestManager : MonoBehaviour
         VillageRoot.SetActive(true);
         ForestBackground.SetActive(false);
         VillageBackground.SetActive(true);
-
         ActionCounter.SetActive(false);
+        CauldronButton.SetActive(true);
+        VillagersCanvas.SetActive(false);
+        EveningButtonsCanvas.SetActive(true);
+        foreach (var btn in FindObjectsByType<RepairButton>(FindObjectsInactive.Exclude))
+            btn.Refresh();
     }
 }

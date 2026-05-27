@@ -17,7 +17,10 @@ public class GameManager : MonoBehaviour
 
     public int Day = 1;
     public GamePhase Phase = GamePhase.Morning;
-
+    public int WallHP = 5;
+    public int MaxWallHP = 5;
+    public int StakeCount = 0;
+    public int MaxStakeCount = 7;
     public Dictionary<ResourceType, int> Resources = new();
     public int Portions = 0;
     public VillagerBuff ActiveBuff = VillagerBuff.None;
@@ -53,7 +56,6 @@ public class GameManager : MonoBehaviour
                 Phase = GamePhase.Evening;
                 CollectDayResources();
                 ForestManager.Instance.ExitForest();
-                ForestManager.Instance.CauldronButton.SetActive(true);
                 Debug.Log("Вечер — вернулись из леса, время готовить");
                 break;
 
@@ -61,12 +63,13 @@ public class GameManager : MonoBehaviour
                 Phase = GamePhase.Night;
                 FeedVillagers();
                 ForestManager.Instance.CauldronButton.SetActive(false);
-                Debug.Log("Ночь наступила");
+                NightManager.Instance.EnterNight();
                 break;
 
             case GamePhase.Night:
                 Phase = GamePhase.Morning;
                 Day++;
+                NightManager.Instance.ExitNight();
                 ResetVillagerTasks();
                 Debug.Log($"=== День {Day} ===");
                 break;
@@ -108,7 +111,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Осталось порций: {Portions}, живых жителей: {vm.Villagers.Count}");
 
         if (vm.Villagers.Count == 0)
-            Debug.Log("Все жители погибли. Игра окончена.");
+            GameOverUI.Instance.Show(Day);
     }
 
     void ResetVillagerTasks()

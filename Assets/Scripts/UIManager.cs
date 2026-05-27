@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text HintText;
     public TMP_Text ActionCounterText;
     public Button EndDayButton;
-
+    public TMP_Text WallHealthText;
     void Awake() => Instance = this;
 
     void Start()
@@ -37,17 +37,25 @@ public class UIManager : MonoBehaviour
         VillagersText.text = $"Люди: {vm.Villagers.Count}";
         BuffText.text = gm.ActiveBuff == VillagerBuff.None ? "" : $"{gm.ActiveBuff}";
 
+        bool isNight = gm.Phase == GamePhase.Night;
+        bool isEvening = gm.Phase == GamePhase.Evening;
+        bool isDay = gm.Phase == GamePhase.Day;
+
+        WallHealthText.gameObject.SetActive(isNight || isEvening);
+        WallHealthText.text = $"Стена: {gm.WallHP}/{gm.MaxWallHP}  Колья: {gm.StakeCount}/{gm.MaxStakeCount}";
+
+        ActionCounterText.gameObject.SetActive(isDay);
+        if (isDay)
+            ActionCounterText.text = $"Действий: {ForestSpawner.Instance.ActionsLeft}/{ForestSpawner.Instance.MaxActions}";
+
         HintText.text = gm.Phase switch
         {
             GamePhase.Morning => "Назначь жителей на работы",
             GamePhase.Day     => "Собирай ресурсы, возвращайся до темноты",
-            GamePhase.Evening => "Приготовь еду в котле",
+            GamePhase.Evening => "Приготовь еду в котле, почини укрепления",
             GamePhase.Night   => "Переживи ночь",
             _                 => ""
         };
-
-        if (gm.Phase == GamePhase.Day)
-            ActionCounterText.text = $"Действий: {ForestSpawner.Instance.ActionsLeft}/{ForestSpawner.Instance.MaxActions}";
 
         EndDayButton.GetComponentInChildren<TMP_Text>().text = gm.Phase switch
         {
