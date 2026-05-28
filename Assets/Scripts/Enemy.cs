@@ -26,6 +26,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (!_initialized) return;
+        
+        if (GameManager.Instance.IsGameOver)
+        {
+            return;
+        }
 
         if (_attacking)
         {
@@ -39,7 +44,7 @@ public class Enemy : MonoBehaviour
 
         if (_rt.position.x <= _manager.WallBoundary.GetWallX(_rt.position.y))
         {
-            SetAttacking(true); // урон будет наноситься в AttackTarget()
+            SetAttacking(true);
         }
     }
 

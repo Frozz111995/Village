@@ -649,6 +649,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1805509458}
     - target: {fileID: 1633686077978746704, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
+      propertyPath: EnemiesPerWave
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633686077978746704, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
       propertyPath: 'Pikes.Array.data[0]'
       value: 
       objectReference: {fileID: 845467960}
@@ -758,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 1698289127}
     - target: {fileID: 3603899122045068970, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
       propertyPath: WallHP
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3603899122045068970, guid: 2f822786af03efb4fa496e06a94a64ab, type: 3}
       propertyPath: MaxWallHP

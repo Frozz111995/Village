@@ -227,6 +227,7 @@ public class NightBattleManager : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.IsGameOver = true;
             GameOverUI.Instance.Show(GameManager.Instance.Day);
         }
     }
