@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
         {
             case GamePhase.Morning:
                 Phase = GamePhase.Day;
-                ActiveBuff = VillagerBuff.None;
                 ForestManager.Instance.EnterForest();
                 Debug.Log("День начался — жители работают, ты в лесу");
                 break;
@@ -56,6 +55,7 @@ public class GameManager : MonoBehaviour
                 Phase = GamePhase.Evening;
                 CollectDayResources();
                 ForestManager.Instance.ExitForest();
+                ActiveBuff = VillagerBuff.None;
                 Debug.Log("Вечер — вернулись из леса, время готовить");
                 break;
 

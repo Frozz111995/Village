@@ -11,40 +11,40 @@ public class Recipe
     public VillagerBuff BuffType;
 }
 
-public enum VillagerBuff { None, HPBonus, ExpeditionBonus }
+public enum VillagerBuff { None, ExpeditionBonus, CombatBonus, ProductionBonus }
 
 public class RecipeBook : MonoBehaviour
 {
     public static RecipeBook Instance;
 
-    private List<Recipe> _recipes = new()
+    public List<Recipe> Recipes = new()
     {
         new Recipe {
             Name = "Грибной суп",
             Ingredients = new[] { ResourceType.Berries, ResourceType.Mushrooms },
-            Portions = 2,
-            Buff = "+1 выносливость",
+            Portions = 1,
+            Buff = "+1 действие в лесу",
             BuffType = VillagerBuff.ExpeditionBonus
         },
         new Recipe {
             Name = "Жаркое",
             Ingredients = new[] { ResourceType.Meat, ResourceType.Roots },
-            Portions = 3,
-            Buff = "+1 HP жителям",
-            BuffType = VillagerBuff.HPBonus
+            Portions = 1,
+            Buff = "Солдаты стреляют быстрее",
+            BuffType = VillagerBuff.CombatBonus
         },
         new Recipe {
             Name = "Уха",
             Ingredients = new[] { ResourceType.Fish, ResourceType.Herbs },
-            Portions = 2,
-            Buff = "+выносливость в вылазке",
-            BuffType = VillagerBuff.ExpeditionBonus
+            Portions = 1,
+            Buff = "+1 ресурс жителям",
+            BuffType = VillagerBuff.ProductionBonus
         },
         new Recipe {
             Name = "Овощной суп",
             Ingredients = new[] { ResourceType.Vegetables, ResourceType.Herbs },
             Portions = 2,
-            Buff = "+1 день без голода",
+            Buff = "+1 порция",
             BuffType = VillagerBuff.None
         },
     };
@@ -53,7 +53,7 @@ public class RecipeBook : MonoBehaviour
 
     public Recipe FindRecipe(List<ResourceType> ingredients)
     {
-        foreach (var recipe in _recipes)
+        foreach (var recipe in Recipes)
         {
             if (recipe.Ingredients.Length != ingredients.Count) continue;
 

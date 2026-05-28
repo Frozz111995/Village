@@ -8,10 +8,15 @@ public class Pike : MonoBehaviour
 
     public void DealDamageTo(Enemy enemy)
     {
-        Debug.Log("pike dealt damage");
         enemy.TakeDamage(1);
+        _hp--;
     }
-
+    
+    public void ResetHP()
+    {
+        _hp = 2;
+    }
+    
     public void TakeDamage()
     {
         _hp--;

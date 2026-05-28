@@ -14,6 +14,9 @@ public class CauldronUI : MonoBehaviour
     public Transform IngredientsContainer;
     public GameObject IngredientButtonPrefab;
 
+    [Header("Иконки ингредиентов")]
+    public IngredientData[] IngredientDataList;
+
     [Header("Слоты")]
     public Image[] SlotImages;
     public TMP_Text[] SlotLabels;
@@ -21,17 +24,25 @@ public class CauldronUI : MonoBehaviour
     [Header("Кнопки")]
     public Button CookButton;
     public Button CloseButton;
+    public Button CauldronButton;
 
     private List<ResourceType> _selectedIngredients = new();
+    private Dictionary<ResourceType, Sprite> _icons = new();
     private Color _emptySlotColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
     private Color _filledSlotColor = new Color(0.3f, 0.7f, 0.3f, 1f);
 
-    void Awake() => Instance = this;
+    void Awake()
+    {
+        Instance = this;
+        foreach (var data in IngredientDataList)
+            _icons[data.Type] = data.Icon;
+    }
 
     void Start()
     {
         CookButton.onClick.AddListener(OnCook);
         CloseButton.onClick.AddListener(OnClose);
+        CauldronButton.onClick.AddListener(Open);
         Panel.SetActive(false);
     }
 
@@ -41,6 +52,13 @@ public class CauldronUI : MonoBehaviour
         _selectedIngredients.Clear();
         RefreshSlots();
         RefreshIngredients();
+        RefreshRecipeButtons();
+    }
+
+    void RefreshRecipeButtons()
+    {
+        foreach (var btn in FindObjectsByType<RecipeButton>(FindObjectsInactive.Exclude))
+            btn.Refresh();
     }
 
     void RefreshIngredients()
@@ -56,6 +74,13 @@ public class CauldronUI : MonoBehaviour
             if (resources[type] <= 0) continue;
 
             var go = Instantiate(IngredientButtonPrefab, IngredientsContainer);
+
+            // Иконка
+            var icon = go.transform.Find("Icon")?.GetComponent<Image>();
+            if (icon != null && _icons.TryGetValue(type, out var sprite))
+                icon.sprite = sprite;
+
+            // Текст
             var label = go.GetComponentInChildren<TMP_Text>();
             label.text = $"{TypeToName(type)} x{resources[type]}";
 
@@ -99,7 +124,6 @@ public class CauldronUI : MonoBehaviour
 
         var gm = GameManager.Instance;
 
-        // Проверяем ингредиенты
         foreach (var ing in _selectedIngredients)
         {
             if (gm.Resources[ing] <= 0)
@@ -109,11 +133,9 @@ public class CauldronUI : MonoBehaviour
             }
         }
 
-        // Списываем ингредиенты
         foreach (var ing in _selectedIngredients)
             gm.Resources[ing]--;
 
-        // Ищем рецепт
         var recipe = RecipeBook.Instance.FindRecipe(_selectedIngredients);
 
         if (recipe != null)
@@ -132,6 +154,14 @@ public class CauldronUI : MonoBehaviour
         RefreshSlots();
         RefreshIngredients();
         UIManager.Instance?.RefreshHUD();
+    }
+
+    public void SelectRecipe(Recipe recipe)
+    {
+        _selectedIngredients.Clear();
+        foreach (var ing in recipe.Ingredients)
+            _selectedIngredients.Add(ing);
+        RefreshSlots();
     }
 
     void OnClose() => Panel.SetActive(false);

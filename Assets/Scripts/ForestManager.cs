@@ -48,5 +48,7 @@ public class ForestManager : MonoBehaviour
         EveningButtonsCanvas.SetActive(true);
         foreach (var btn in FindObjectsByType<RepairButton>(FindObjectsInactive.Exclude))
             btn.Refresh();
+        if (GameManager.Instance.ActiveBuff == VillagerBuff.ExpeditionBonus)
+            ForestSpawner.Instance.MaxActions--; 
     }
 }

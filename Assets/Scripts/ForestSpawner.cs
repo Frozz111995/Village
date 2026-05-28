@@ -6,6 +6,7 @@ public class ForestSpawner : MonoBehaviour
     public static ForestSpawner Instance;
     private List<Vector2> _spawnedPositions = new();
     private float _minDistance = 150f;
+
     [Header("Спавн")]
     public RectTransform SpawnArea;
     public GameObject ForestObjectPrefab;
@@ -14,18 +15,18 @@ public class ForestSpawner : MonoBehaviour
     [Header("Действия")]
     public int MaxActions = 5;
     public int ActionsLeft { get; private set; }
-    
+
     public Vector2[] ResourceSizes = {
-        new Vector2(80, 80),   // Berries
-        new Vector2(60, 60),   // Mushrooms
-        new Vector2(60, 60),   // Herbs
-        new Vector2(100, 100), // Meat
-        new Vector2(70, 70),   // Roots
-        new Vector2(90, 70),   // Fish
-        new Vector2(120, 150)  // Wood
+        new Vector2(80, 80),
+        new Vector2(60, 60),
+        new Vector2(60, 60),
+        new Vector2(100, 100),
+        new Vector2(70, 70),
+        new Vector2(90, 70),
+        new Vector2(120, 150)
     };
     public float[] OutlineWidths = { 15f, 25f, 20f, 18f, 22f, 12f, 10f };
-    
+
     [Header("Ресурсы и веса")]
     public ResourceType[] PossibleResources = {
         ResourceType.Berries,
@@ -48,7 +49,14 @@ public class ForestSpawner : MonoBehaviour
 
     public void SpawnForest()
     {
+        // ExpeditionBonus — +1 действие в лесу
         ActionsLeft = MaxActions;
+        if (GameManager.Instance.ActiveBuff == VillagerBuff.ExpeditionBonus)
+        {
+            MaxActions += 1;
+            ActionsLeft += 1;
+        }
+
         _survivorFoundThisRun = false;
         _spawnedPositions.Clear();
 
@@ -104,7 +112,6 @@ public class ForestSpawner : MonoBehaviour
             _spawnedObjects.Add(go);
         }
 
-        // Сортируем по Y — нижние объекты рисуются поверх верхних
         _spawnedObjects.Sort((a, b) =>
             b.GetComponent<RectTransform>().anchoredPosition.y
                 .CompareTo(a.GetComponent<RectTransform>().anchoredPosition.y));
@@ -125,7 +132,7 @@ public class ForestSpawner : MonoBehaviour
     public bool TryFindSurvivor()
     {
         if (_survivorFoundThisRun) return false;
-        if (Random.Range(0, 100) >= 15) return false;
+        if (Random.Range(0, 100) >= 10) return false;
 
         _survivorFoundThisRun = true;
         return true;

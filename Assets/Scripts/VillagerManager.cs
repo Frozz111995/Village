@@ -18,7 +18,6 @@ public class VillagerManager : MonoBehaviour
     public List<Villager> Villagers = new();
     private string[] _names = { "Арне", "Берта", "Гунар", "Дагни", "Эйрик", "Фрея" };
 
-    // Счётчик дней со свиньями для каждого жителя
     private Dictionary<Villager, int> _pigDays = new();
 
     void Awake()
@@ -45,13 +44,12 @@ public class VillagerManager : MonoBehaviour
             {
                 v.Starve();
             }
-        } 
+        }
 
         Villagers.RemoveAll(v => !v.IsAlive);
         Debug.Log($"Живых жителей: {Villagers.Count}");
     }
 
-    // Возвращает сколько порций дала кухня
     public int ProcessKitchen()
     {
         int portions = 0;
@@ -61,10 +59,11 @@ public class VillagerManager : MonoBehaviour
         return portions;
     }
 
-    // Возвращает ресурсы от задач, вызывается в конце дня
     public CollectedResources ProcessTasks()
     {
         var result = new CollectedResources();
+        bool productionBonus = GameManager.Instance.ActiveBuff == VillagerBuff.ProductionBonus;
+        int bonus = productionBonus ? 1 : 0;
 
         foreach (var v in Villagers)
         {
@@ -73,11 +72,11 @@ public class VillagerManager : MonoBehaviour
             switch (v.Task)
             {
                 case VillagerTask.Garden:
-                    result.Vegetables += 1;
+                    result.Vegetables += 1 + bonus;
                     break;
 
                 case VillagerTask.Woodpile:
-                    result.Wood += 1;
+                    result.Wood += 1 + bonus;
                     break;
 
                 case VillagerTask.Pigs:
@@ -85,14 +84,14 @@ public class VillagerManager : MonoBehaviour
                     _pigDays[v]++;
                     if (_pigDays[v] >= 3)
                     {
-                        result.Meat += 2;
+                        result.Meat += 2 + bonus;
                         _pigDays[v] = 0;
-                        Debug.Log($"{v.Name} вырастил свинью — мясо +2");
+                        Debug.Log($"{v.Name} вырастил свинью — мясо +{2 + bonus}");
                     }
                     break;
 
                 case VillagerTask.Foraging:
-                    ProcessForaging(result);
+                    ProcessForaging(result, bonus);
                     break;
             }
         }
@@ -100,16 +99,15 @@ public class VillagerManager : MonoBehaviour
         return result;
     }
 
-    void ProcessForaging(CollectedResources result)
+    void ProcessForaging(CollectedResources result, int bonus)
     {
-        // Случайный ресурс за забором
         int roll = Random.Range(0, 4);
         switch (roll)
         {
-            case 0: result.Berries += 1; break;
-            case 1: result.Mushrooms += 1; break;
-            case 2: result.Herbs += 1; break;
-            case 3: result.Wood += 1; break;
+            case 0: result.Berries += 1 + bonus; break;
+            case 1: result.Mushrooms += 1 + bonus; break;
+            case 2: result.Herbs += 1 + bonus; break;
+            case 3: result.Wood += 1 + bonus; break;
         }
     }
 

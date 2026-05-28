@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class NightBattleManager : MonoBehaviour
 {
     public static NightBattleManager Instance;
+
     [Header("Солдаты и колья")]
-    public List<GameObject> Soldiers; // подвяжи в инспекторе
-    public List<GameObject> Pikes;    // подвяжи в инспекторе
+    public List<GameObject> Soldiers;
+    public List<GameObject> Pikes;
+
     [Header("Префабы")]
     public GameObject EnemyPrefab;
     public GameObject ArrowPrefab;
@@ -17,12 +19,14 @@ public class NightBattleManager : MonoBehaviour
     public RectTransform SoldierArea;
     public RectTransform EnemyArea;
     public WallBoundary WallBoundary;
+
     [Header("Настройки")]
     public float ArrowSpeed = 300f;
     public float ShootInterval = 1.5f;
     public int EnemiesPerWave = 3;
-    public float ShootRange = 400f; // <-- добавь
+    public float ShootRange = 400f;
 
+    private float _baseShootInterval;
     private List<GameObject> _soldiers = new();
     private List<GameObject> _enemies = new();
     private List<GameObject> _arrows = new();
@@ -31,13 +35,22 @@ public class NightBattleManager : MonoBehaviour
     private int _enemiesDefeated = 0;
     private int _totalEnemies = 0;
 
-    void Awake() => Instance = this;
+    void Awake()
+    {
+        Instance = this;
+        _baseShootInterval = ShootInterval;
+    }
 
     public void StartBattle()
     {
         _battleActive = true;
         _enemiesDefeated = 0;
         _totalEnemies = EnemiesPerWave + GameManager.Instance.Day;
+
+        // CombatBonus — солдаты стреляют вдвое быстрее
+        ShootInterval = GameManager.Instance.ActiveBuff == VillagerBuff.CombatBonus
+            ? _baseShootInterval * 0.5f
+            : _baseShootInterval;
 
         UIManager.Instance.EndDayButton.interactable = false;
 
@@ -46,6 +59,7 @@ public class NightBattleManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
         StartCoroutine(AutoShoot());
     }
+
     void ActivateSoldiers()
     {
         foreach (var s in Soldiers) s.SetActive(false);
@@ -69,10 +83,14 @@ public class NightBattleManager : MonoBehaviour
 
     void ActivatePikes()
     {
-        // Чистим null из списка
         Pikes.RemoveAll(p => p == null);
-    
-        foreach (var p in Pikes) p.SetActive(false);
+        foreach (var p in Pikes)
+        {
+            p.SetActive(false);
+            // сбрасываем цвет
+            p.GetComponent<Image>().color = Color.white;
+            p.GetComponent<Pike>().ResetHP();
+        }
 
         int count = Mathf.Min(GameManager.Instance.StakeCount, Pikes.Count);
 
@@ -138,7 +156,7 @@ public class NightBattleManager : MonoBehaviour
         if (animator != null)
             animator.SetTrigger("Attack");
 
-        StartCoroutine(ShootWithDelay(soldier, target, 0.4f)); // 0.4f — подбери под анимацию
+        StartCoroutine(ShootWithDelay(soldier, target, 0.4f));
     }
 
     IEnumerator ShootWithDelay(GameObject soldier, GameObject target, float delay)
@@ -199,22 +217,26 @@ public class NightBattleManager : MonoBehaviour
 
     public void OnEnemyReachedWall()
     {
-        GameManager.Instance.WallHP--;
+        if (GameManager.Instance.WallHP - 1 < 0)
+            GameManager.Instance.WallHP = 0;
+        else
+            GameManager.Instance.WallHP--;
+        
         UIManager.Instance.RefreshHUD();
 
         if (GameManager.Instance.WallHP <= 0)
             EndBattle(false);
-    }
+    } 
 
     void EndBattle(bool victory)
     {
         _battleActive = false;
+        ShootInterval = _baseShootInterval;
         StopAllCoroutines();
 
         foreach (var a in _arrows) if (a != null) Destroy(a);
         _arrows.Clear();
 
-        // Считаем оставшиеся колья
         int survivingPikes = 0;
         foreach (var p in Pikes)
             if (p != null && p.activeSelf) survivingPikes++;
@@ -232,5 +254,5 @@ public class NightBattleManager : MonoBehaviour
         }
     }
 
-    public List<GameObject> GetPikes() => Pikes; // вместо _pikes
+    public List<GameObject> GetPikes() => Pikes;
 }
