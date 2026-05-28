@@ -29,20 +29,21 @@ public class RecipeButton : MonoBehaviour
 
     void OnClick()
     {
-        CauldronUI.Instance.SelectRecipe(_recipe);
         var gm = GameManager.Instance;
         bool hasIngredients = true;
 
         foreach (var ing in _recipe.Ingredients)
         {
-            if (gm.Resources[ing]-1 <= 0)
+            if (gm.Resources[ing] <= 0)
             {
                 hasIngredients = false;
                 break;
             }
         }
 
-        _button.interactable = hasIngredients;
+        if (!hasIngredients) return;
+
+        CauldronUI.Instance.SelectRecipeWithAnimation(_recipe);
     }
 
     public void Refresh()

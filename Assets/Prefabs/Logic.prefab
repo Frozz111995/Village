@@ -95,13 +95,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  SlotLabels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   CookButton: {fileID: 0}
   CloseButton: {fileID: 0}
   CauldronButton: {fileID: 0}
+  CauldronRect: {fileID: 0}
 --- !u!114 &7262589916266497068
 MonoBehaviour:
   m_ObjectHideFlags: 0

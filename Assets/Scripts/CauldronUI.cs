@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class CauldronUI : MonoBehaviour
 
     [Header("Панель")]
     public GameObject Panel;
-
+    public GameObject IconSpawnRoot;
     [Header("Ингредиенты")]
     public Transform IngredientsContainer;
     public GameObject IngredientButtonPrefab;
@@ -19,17 +20,20 @@ public class CauldronUI : MonoBehaviour
 
     [Header("Слоты")]
     public Image[] SlotImages;
-    public TMP_Text[] SlotLabels;
 
     [Header("Кнопки")]
     public Button CookButton;
     public Button CloseButton;
     public Button CauldronButton;
 
+    [Header("Котёл")]
+    public RectTransform CauldronRect;
+
     private List<ResourceType> _selectedIngredients = new();
     private Dictionary<ResourceType, Sprite> _icons = new();
-    private Color _emptySlotColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-    private Color _filledSlotColor = new Color(0.3f, 0.7f, 0.3f, 1f);
+    private List<GameObject> _flyingIcons = new();
+    private Color _emptySlotColor = new Color(1f, 1f, 1f, 0.2f);
+    private Color _filledSlotColor = new Color(1f, 1f, 1f, 1f);
 
     void Awake()
     {
@@ -48,6 +52,10 @@ public class CauldronUI : MonoBehaviour
 
     public void Open()
     {
+        foreach (var icon in _flyingIcons)
+            if (icon != null) Destroy(icon);
+        _flyingIcons.Clear();
+
         Panel.SetActive(true);
         _selectedIngredients.Clear();
         RefreshSlots();
@@ -75,12 +83,13 @@ public class CauldronUI : MonoBehaviour
 
             var go = Instantiate(IngredientButtonPrefab, IngredientsContainer);
 
-            // Иконка
+            var tag = go.AddComponent<IngredientTag>();
+            tag.Type = type;
+
             var icon = go.transform.Find("Icon")?.GetComponent<Image>();
             if (icon != null && _icons.TryGetValue(type, out var sprite))
                 icon.sprite = sprite;
 
-            // Текст
             var label = go.GetComponentInChildren<TMP_Text>();
             label.text = $"{TypeToName(type)} x{resources[type]}";
 
@@ -95,8 +104,22 @@ public class CauldronUI : MonoBehaviour
         if (_selectedIngredients.Count >= 3) return;
         if (_selectedIngredients.Contains(type)) return;
 
-        _selectedIngredients.Add(type);
-        RefreshSlots();
+        var btn = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        if (btn != null)
+        {
+            var rect = btn.GetComponent<RectTransform>();
+            var flying = IngredientFlyAnimation.Play(rect, CauldronRect, IconSpawnRoot.transform, Vector2.zero, () =>
+            {
+                _selectedIngredients.Add(type);
+                RefreshSlots();
+            });
+            if (flying != null) _flyingIcons.Add(flying);
+        }
+        else
+        {
+            _selectedIngredients.Add(type);
+            RefreshSlots();
+        }
     }
 
     void RefreshSlots()
@@ -106,12 +129,13 @@ public class CauldronUI : MonoBehaviour
             if (i < _selectedIngredients.Count)
             {
                 SlotImages[i].color = _filledSlotColor;
-                SlotLabels[i].text = TypeToName(_selectedIngredients[i]);
+                if (_icons.TryGetValue(_selectedIngredients[i], out var sprite))
+                    SlotImages[i].sprite = sprite;
             }
             else
             {
                 SlotImages[i].color = _emptySlotColor;
-                SlotLabels[i].text = "—";
+                SlotImages[i].sprite = null;
             }
         }
 
@@ -153,6 +177,10 @@ public class CauldronUI : MonoBehaviour
         _selectedIngredients.Clear();
         RefreshSlots();
         RefreshIngredients();
+        RefreshRecipeButtons();
+        foreach (var icon in _flyingIcons)
+            if (icon != null) Destroy(icon);
+        _flyingIcons.Clear(); 
         UIManager.Instance?.RefreshHUD();
     }
 
@@ -164,7 +192,47 @@ public class CauldronUI : MonoBehaviour
         RefreshSlots();
     }
 
-    void OnClose() => Panel.SetActive(false);
+    public void SelectRecipeWithAnimation(Recipe recipe)
+    {
+        _selectedIngredients.Clear();
+        RefreshSlots();
+        StartCoroutine(AddIngredientsOneByOne(recipe));
+    }
+
+    IEnumerator AddIngredientsOneByOne(Recipe recipe)
+    {
+        foreach (var ing in recipe.Ingredients)
+        {
+            foreach (Transform child in IngredientsContainer)
+            {
+                var tag = child.GetComponent<IngredientTag>();
+                if (tag == null || tag.Type != ing) continue;
+
+                var rect = child.GetComponent<RectTransform>();
+                bool done = false;
+
+                var flying = IngredientFlyAnimation.Play(rect, CauldronRect, IconSpawnRoot.transform, Vector2.zero, () =>
+                {
+                    _selectedIngredients.Add(ing);
+                    RefreshSlots();
+                    done = true;
+                });
+                if (flying != null) _flyingIcons.Add(flying);
+
+                yield return new WaitUntil(() => done);
+                break;
+            }
+        }
+    }
+
+    void OnClose()
+    {
+        foreach (var icon in _flyingIcons)
+            if (icon != null) Destroy(icon);
+        _flyingIcons.Clear();
+
+        Panel.SetActive(false);
+    }
 
     string TypeToName(ResourceType type) => type switch
     {
