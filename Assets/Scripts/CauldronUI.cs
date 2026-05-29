@@ -32,7 +32,7 @@ public class CauldronUI : MonoBehaviour
 
     private Dictionary<ResourceType, Sprite> _icons = new();
     private List<GameObject> _flyingIcons = new();
-    private Color _emptySlotColor = new Color(1f, 1f, 1f, 0.2f);
+    private Color _emptySlotColor = new Color(1f, 1f, 1f, 0.0f);
     private Color _filledSlotColor = new Color(1f, 1f, 1f, 1f);
 
     void Awake()

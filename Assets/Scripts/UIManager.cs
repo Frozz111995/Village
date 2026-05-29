@@ -36,13 +36,13 @@ public class UIManager : MonoBehaviour
         PortionsText.text = $"Еда: {gm.Portions}";
         VillagersText.text = $"Люди: {vm.Villagers.Count}";
         BuffText.text = gm.ActiveBuff == VillagerBuff.None ? "" : $"{gm.ActiveBuff}";
-
+ 
         bool isNight = gm.Phase == GamePhase.Night;
         bool isEvening = gm.Phase == GamePhase.Evening;
         bool isDay = gm.Phase == GamePhase.Day;
 
         WallHealthText.gameObject.SetActive(isNight || isEvening);
-        WallHealthText.text = $"Стена: {gm.WallHP}/{gm.MaxWallHP}  Колья: {gm.StakeCount}/{gm.MaxStakeCount}";
+        WallHealthText.text = $"Стена: {gm.WallHP}/{gm.MaxWallHP}\nКолья: {gm.StakeCount}/{gm.MaxStakeCount}";
 
         ActionCounterText.gameObject.SetActive(isDay);
         if (isDay)

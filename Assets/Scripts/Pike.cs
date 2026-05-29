@@ -8,7 +8,7 @@ public class Pike : MonoBehaviour
 
     public void DealDamageTo(Enemy enemy)
     {
-        enemy.TakeDamage(1);
+        enemy.TakeDamage(2);
         _hp--;
     }
     

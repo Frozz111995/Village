@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     private NightBattleManager _manager;
     private RectTransform _rt;
     private Animator _animator;
-    private int _hp = 3;
+    private int _hp = 4;
     private bool _attacking = false;
     private GameObject _targetPike = null;
     private float _attackTimer = 0f;

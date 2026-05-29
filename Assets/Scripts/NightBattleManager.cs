@@ -47,7 +47,6 @@ public class NightBattleManager : MonoBehaviour
         _enemiesDefeated = 0;
         _totalEnemies = EnemiesPerWave + GameManager.Instance.Day;
 
-        // CombatBonus — солдаты стреляют вдвое быстрее
         ShootInterval = GameManager.Instance.ActiveBuff == VillagerBuff.CombatBonus
             ? _baseShootInterval * 0.5f
             : _baseShootInterval;
@@ -57,7 +56,6 @@ public class NightBattleManager : MonoBehaviour
         ActivateSoldiers();
         ActivatePikes();
         StartCoroutine(SpawnEnemies());
-        StartCoroutine(AutoShoot());
     }
 
     void ActivateSoldiers()
@@ -79,6 +77,36 @@ public class NightBattleManager : MonoBehaviour
             shuffled[i].SetActive(true);
             _soldiers.Add(shuffled[i]);
         }
+
+        float offset = ShootInterval / _soldiers.Count;
+        for (int i = 0; i < _soldiers.Count; i++)
+            StartCoroutine(SoldierShootLoop(_soldiers[i], offset * i));
+    }
+
+    IEnumerator SoldierShootLoop(GameObject soldier, float startDelay)
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        while (_battleActive)
+        {
+            if (soldier == null || !soldier.activeSelf) yield break;
+
+            var target = GetNearestEnemy();
+            if (target != null)
+            {
+                // дистанция считается от ближайшего солдата к цели, не от текущего
+                GameObject nearestSoldier = GetNearestSoldierTo(target);
+                float dist = nearestSoldier != null ? Vector2.Distance(
+                    nearestSoldier.GetComponent<RectTransform>().position,
+                    target.GetComponent<RectTransform>().position
+                ) : float.MaxValue;
+
+                if (dist <= ShootRange)
+                    ShootArrow(soldier, target);
+            }
+
+            yield return new WaitForSeconds(ShootInterval);
+        }
     }
 
     void ActivatePikes()
@@ -87,7 +115,6 @@ public class NightBattleManager : MonoBehaviour
         foreach (var p in Pikes)
         {
             p.SetActive(false);
-            // сбрасываем цвет
             p.GetComponent<Image>().color = Color.white;
             p.GetComponent<Pike>().ResetHP();
         }
@@ -125,31 +152,6 @@ public class NightBattleManager : MonoBehaviour
         }
     }
 
-    IEnumerator AutoShoot()
-    {
-        while (_battleActive)
-        {
-            foreach (var soldier in _soldiers)
-            {
-                if (soldier == null || !soldier.activeSelf) continue;
-
-                var target = GetNearestEnemy();
-                if (target != null)
-                {
-                    float dist = Vector2.Distance(
-                        soldier.GetComponent<RectTransform>().position,
-                        target.GetComponent<RectTransform>().position
-                    );
-
-                    if (dist <= ShootRange)
-                        ShootArrow(soldier, target);
-                }
-
-                yield return new WaitForSeconds(ShootInterval);
-            }
-        }
-    }
-
     void ShootArrow(GameObject soldier, GameObject target)
     {
         var animator = soldier.GetComponent<Animator>();
@@ -163,7 +165,8 @@ public class NightBattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        if (soldier == null || target == null) yield break;
+        if (soldier == null || !soldier.activeSelf) yield break;
+        if (target == null || !target.activeSelf) yield break;
 
         var arrow = Instantiate(ArrowPrefab, SoldierArea.parent);
         arrow.GetComponent<RectTransform>().position = soldier.GetComponent<RectTransform>().position;
@@ -221,12 +224,12 @@ public class NightBattleManager : MonoBehaviour
             GameManager.Instance.WallHP = 0;
         else
             GameManager.Instance.WallHP--;
-        
+
         UIManager.Instance.RefreshHUD();
 
         if (GameManager.Instance.WallHP <= 0)
             EndBattle(false);
-    } 
+    }
 
     void EndBattle(bool victory)
     {

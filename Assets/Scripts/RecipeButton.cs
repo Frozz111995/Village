@@ -11,7 +11,8 @@ public class RecipeButton : MonoBehaviour
     [SerializeField] private TMP_Text _titleLabel;
     [SerializeField] private TMP_Text _ingredientsLabel;
     [SerializeField] private TMP_Text _buffLabel;
-
+    [SerializeField] private Image _iconImage;
+    [SerializeField] private CanvasGroup _canvasGroup; // добавить поле
     private Recipe _recipe;
     private Button _button;
 
@@ -66,13 +67,15 @@ public class RecipeButton : MonoBehaviour
         }
 
         _button.interactable = hasIngredients;
+        _canvasGroup.alpha = hasIngredients ? 1f : 0.4f;
     }
 
     void UpdateLabels()
     {
         if (_titleLabel != null)
             _titleLabel.text = _recipe.Name;
-
+        if (_iconImage != null && _recipe.Icon != null)
+            _iconImage.sprite = _recipe.Icon;
         if (_ingredientsLabel != null)
         {
             List<string> ingredientNames = new List<string>();

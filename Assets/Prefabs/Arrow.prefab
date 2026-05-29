@@ -88,3 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15af6967c482ff46b7edadc15e6d4c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arrow
+  _rotationOffset: -66

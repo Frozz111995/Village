@@ -9,6 +9,7 @@ public class Recipe
     public int Portions;
     public string Buff;
     public VillagerBuff BuffType;
+    public Sprite Icon; // добавить
 }
 
 public enum VillagerBuff { None, ExpeditionBonus, CombatBonus, ProductionBonus }
@@ -16,7 +17,7 @@ public enum VillagerBuff { None, ExpeditionBonus, CombatBonus, ProductionBonus }
 public class RecipeBook : MonoBehaviour
 {
     public static RecipeBook Instance;
-
+ 
     public List<Recipe> Recipes = new()
     {
         new Recipe {
