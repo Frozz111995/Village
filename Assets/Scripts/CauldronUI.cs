@@ -174,8 +174,9 @@ public class CauldronUI : MonoBehaviour
         }
         else
         {
-            gm.Portions += 1;
-            Debug.Log("Похлёбка. +1 порция");
+            int portions = selected.Count >= 3 ? 2 : 1;
+            gm.Portions += portions;
+            Debug.Log($"Похлёбка. +{portions} порции");
         }
 
         state.Clear();
