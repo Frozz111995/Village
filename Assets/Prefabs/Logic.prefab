@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 235705462485738574}
   - component: {fileID: 7262589916266497068}
   - component: {fileID: 2863166004164932579}
+  - component: {fileID: 7153425769267507612}
   m_Layer: 0
   m_Name: UIControllers
   m_TagString: Untagged
@@ -81,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CauldronUI
   Panel: {fileID: 0}
+  IconSpawnRoot: {fileID: 0}
   IngredientsContainer: {fileID: 0}
   IngredientButtonPrefab: {fileID: 4937082373028416838, guid: 88a3a1f6dffe5cb4a9f8d729b1c6e51b, type: 3}
   IngredientDataList:
@@ -136,6 +138,18 @@ MonoBehaviour:
   Panel: {fileID: 0}
   DaysText: {fileID: 0}
   RestartButton: {fileID: 0}
+--- !u!114 &7153425769267507612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702349491743244593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b097c3a1a68a4e8704d28c35524ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CauldronSelectionState
 --- !u!1 &3655507622547021749
 GameObject:
   m_ObjectHideFlags: 0

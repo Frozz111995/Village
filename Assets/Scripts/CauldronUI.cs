@@ -11,6 +11,7 @@ public class CauldronUI : MonoBehaviour
     [Header("Панель")]
     public GameObject Panel;
     public GameObject IconSpawnRoot;
+
     [Header("Ингредиенты")]
     public Transform IngredientsContainer;
     public GameObject IngredientButtonPrefab;
@@ -29,7 +30,6 @@ public class CauldronUI : MonoBehaviour
     [Header("Котёл")]
     public RectTransform CauldronRect;
 
-    private List<ResourceType> _selectedIngredients = new();
     private Dictionary<ResourceType, Sprite> _icons = new();
     private List<GameObject> _flyingIcons = new();
     private Color _emptySlotColor = new Color(1f, 1f, 1f, 0.2f);
@@ -52,12 +52,10 @@ public class CauldronUI : MonoBehaviour
 
     public void Open()
     {
-        foreach (var icon in _flyingIcons)
-            if (icon != null) Destroy(icon);
-        _flyingIcons.Clear();
+        ClearFlyingIcons();
+        CauldronSelectionState.Instance.Clear();
 
         Panel.SetActive(true);
-        _selectedIngredients.Clear();
         RefreshSlots();
         RefreshIngredients();
         RefreshRecipeButtons();
@@ -101,35 +99,38 @@ public class CauldronUI : MonoBehaviour
 
     void OnIngredientClicked(ResourceType type)
     {
-        if (_selectedIngredients.Count >= 3) return;
-        if (_selectedIngredients.Contains(type)) return;
+        var state = CauldronSelectionState.Instance;
+        if (!state.CanAdd(type)) return;
 
         var btn = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         if (btn != null)
         {
+            state.Reserve(type);
             var rect = btn.GetComponent<RectTransform>();
             var flying = IngredientFlyAnimation.Play(rect, CauldronRect, IconSpawnRoot.transform, Vector2.zero, () =>
             {
-                _selectedIngredients.Add(type);
+                state.Confirm(type);
                 RefreshSlots();
             });
             if (flying != null) _flyingIcons.Add(flying);
         }
         else
         {
-            _selectedIngredients.Add(type);
+            state.Confirm(type);
             RefreshSlots();
         }
     }
 
     void RefreshSlots()
     {
+        var selected = CauldronSelectionState.Instance.Selected;
+
         for (int i = 0; i < SlotImages.Length; i++)
         {
-            if (i < _selectedIngredients.Count)
+            if (i < selected.Count)
             {
                 SlotImages[i].color = _filledSlotColor;
-                if (_icons.TryGetValue(_selectedIngredients[i], out var sprite))
+                if (_icons.TryGetValue(selected[i], out var sprite))
                     SlotImages[i].sprite = sprite;
             }
             else
@@ -139,16 +140,19 @@ public class CauldronUI : MonoBehaviour
             }
         }
 
-        CookButton.interactable = _selectedIngredients.Count >= 2;
+        CookButton.interactable = selected.Count >= 2;
     }
 
     void OnCook()
     {
-        if (_selectedIngredients.Count < 2) return;
+        var state = CauldronSelectionState.Instance;
+        var selected = state.Selected;
+
+        if (selected.Count < 2) return;
 
         var gm = GameManager.Instance;
 
-        foreach (var ing in _selectedIngredients)
+        foreach (var ing in selected)
         {
             if (gm.Resources[ing] <= 0)
             {
@@ -157,11 +161,11 @@ public class CauldronUI : MonoBehaviour
             }
         }
 
-        foreach (var ing in _selectedIngredients)
+        foreach (var ing in selected)
             gm.Resources[ing]--;
 
-        var recipe = RecipeBook.Instance.FindRecipe(_selectedIngredients);
-
+        var recipe = RecipeBook.Instance.FindRecipe(new List<ResourceType>(selected));
+ 
         if (recipe != null)
         {
             gm.Portions += recipe.Portions;
@@ -174,33 +178,36 @@ public class CauldronUI : MonoBehaviour
             Debug.Log("Похлёбка. +1 порция");
         }
 
-        _selectedIngredients.Clear();
+        state.Clear();
+        ClearFlyingIcons();
         RefreshSlots();
         RefreshIngredients();
         RefreshRecipeButtons();
-        foreach (var icon in _flyingIcons)
-            if (icon != null) Destroy(icon);
-        _flyingIcons.Clear(); 
         UIManager.Instance?.RefreshHUD();
     }
 
     public void SelectRecipe(Recipe recipe)
     {
-        _selectedIngredients.Clear();
+        var state = CauldronSelectionState.Instance;
+        state.Clear();
         foreach (var ing in recipe.Ingredients)
-            _selectedIngredients.Add(ing);
+            state.Confirm(ing);
         RefreshSlots();
     }
 
-    public void SelectRecipeWithAnimation(Recipe recipe)
+    public void SelectRecipeWithAnimation(Recipe recipe, System.Action onComplete = null)
     {
-        _selectedIngredients.Clear();
+        var state = CauldronSelectionState.Instance;
+        state.Clear();
+        state.LockForRecipe();
         RefreshSlots();
-        StartCoroutine(AddIngredientsOneByOne(recipe));
+        StartCoroutine(AddIngredientsOneByOne(recipe, onComplete));
     }
 
-    IEnumerator AddIngredientsOneByOne(Recipe recipe)
+    IEnumerator AddIngredientsOneByOne(Recipe recipe, System.Action onComplete = null)
     {
+        var state = CauldronSelectionState.Instance;
+
         foreach (var ing in recipe.Ingredients)
         {
             foreach (Transform child in IngredientsContainer)
@@ -211,9 +218,11 @@ public class CauldronUI : MonoBehaviour
                 var rect = child.GetComponent<RectTransform>();
                 bool done = false;
 
+                state.Reserve(ing);
+
                 var flying = IngredientFlyAnimation.Play(rect, CauldronRect, IconSpawnRoot.transform, Vector2.zero, () =>
                 {
-                    _selectedIngredients.Add(ing);
+                    state.Confirm(ing);
                     RefreshSlots();
                     done = true;
                 });
@@ -223,15 +232,23 @@ public class CauldronUI : MonoBehaviour
                 break;
             }
         }
+
+        state.Unlock();
+        onComplete?.Invoke();
     }
 
     void OnClose()
     {
+        ClearFlyingIcons();
+        CauldronSelectionState.Instance.Clear();
+        Panel.SetActive(false);
+    }
+
+    void ClearFlyingIcons()
+    {
         foreach (var icon in _flyingIcons)
             if (icon != null) Destroy(icon);
         _flyingIcons.Clear();
-
-        Panel.SetActive(false);
     }
 
     string TypeToName(ResourceType type) => type switch

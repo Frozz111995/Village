@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class RecipeButton : MonoBehaviour
 {
     public int RecipeIndex;
-    
+
     [Header("UI Text Fields")]
     [SerializeField] private TMP_Text _titleLabel;
     [SerializeField] private TMP_Text _ingredientsLabel;
@@ -29,6 +29,8 @@ public class RecipeButton : MonoBehaviour
 
     void OnClick()
     {
+        if (CauldronSelectionState.Instance.IsLocked) return;
+
         var gm = GameManager.Instance;
         bool hasIngredients = true;
 
@@ -68,27 +70,17 @@ public class RecipeButton : MonoBehaviour
 
     void UpdateLabels()
     {
-        // 1. Устанавливаем заголовок рецепта
         if (_titleLabel != null)
-        {
             _titleLabel.text = _recipe.Name;
-        }
 
-        // 2. Формируем список ингредиентов через "+"
         if (_ingredientsLabel != null)
         {
             List<string> ingredientNames = new List<string>();
-            
             foreach (var ing in _recipe.Ingredients)
-            {
                 ingredientNames.Add(IngToName(ing));
-            }
-
-            string ingredientsText = string.Join(" + ", ingredientNames);
-            _ingredientsLabel.text = $"Ингредиенты: {ingredientsText}";
+            _ingredientsLabel.text = $"Ингредиенты: {string.Join(" + ", ingredientNames)}";
         }
 
-        // 3. Устанавливаем эффект (если он есть)
         if (_buffLabel != null)
         {
             if (!string.IsNullOrEmpty(_recipe.Buff))
@@ -98,7 +90,6 @@ public class RecipeButton : MonoBehaviour
             }
             else
             {
-                // Если эффекта нет, скрываем текстовое поле, чтобы не висел пустой префикс
                 _buffLabel.gameObject.SetActive(false);
             }
         }
