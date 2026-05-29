@@ -25,6 +25,7 @@ public class Pike : MonoBehaviour
             GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 0.5f);
             gameObject.SetActive(false);
             GameManager.Instance.StakeCount = Mathf.Max(0, GameManager.Instance.StakeCount - 1);
+            UIManager.Instance.RefreshHUD(); // добавить сюда
         }
         Debug.Log("Pikes hp = " + _hp);
     }

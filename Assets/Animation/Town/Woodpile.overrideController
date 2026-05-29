@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Woodpile
+  m_Controller: {fileID: 9100000, guid: 78462390f30ba914fbbe172e338060ae, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e1cd874906239a0409406b627f07193c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4989a70c365f4bf45a3cf14005c4940e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 86dab67bad390434694cadae3d590180, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 55b41ec644d6c7448af7cca936e3565c, type: 2}

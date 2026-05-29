@@ -4,16 +4,21 @@ using UnityEngine.UI;
 public class WorkZone : MonoBehaviour
 {
     public VillagerTask Task;
-
+    public Animator Animator;
+    public Material OutlineMaterial;
+    public Image OutlineImage;
     private Villager _assignedVillager;
-    private Image _buttonImage;
-
-    private Color _emptyColor = new Color(0.5f, 0.5f, 0.5f, 1f);
-    private Color _filledColor = new Color(0.3f, 0.7f, 0.3f, 1f);
+    private Image _image;
+    private Material _mat;
 
     void Start()
     {
-        _buttonImage = GetComponent<Image>();
+        _image = GetComponent<Image>();
+        if (OutlineMaterial != null)
+        {
+            _mat = Instantiate(OutlineMaterial);
+            if (_image != null) _image.material = _mat;
+        }
         GetComponent<Button>().onClick.AddListener(OnTap);
         Refresh();
     }
@@ -51,12 +56,12 @@ public class WorkZone : MonoBehaviour
 
     public void Refresh()
     {
-        if (_assignedVillager != null && _assignedVillager.IsAlive)
-            _buttonImage.color = _filledColor;
-        else
-        {
-            _buttonImage.color = _emptyColor;
-            _assignedVillager = null;
-        }
+        bool isActive = _assignedVillager != null && _assignedVillager.IsAlive;
+
+        if (!isActive) _assignedVillager = null;
+
+        if (_image != null) _image.material = isActive ? null : _mat;
+        if (OutlineImage != null) OutlineImage.material = isActive ? null : _mat;
+        if (Animator != null) Animator.SetBool("Active", isActive);
     }
 }
