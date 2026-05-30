@@ -6,10 +6,10 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Foraging
+  m_Name: Foraging2
   m_Controller: {fileID: 9100000, guid: 78462390f30ba914fbbe172e338060ae, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: e1cd874906239a0409406b627f07193c, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: bdc8b8bb80d4a5b499c35e676a966bd8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d1ffe2ce846bf1a4290fbe88f8daebf9, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 86dab67bad390434694cadae3d590180, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: e84147c23a9761b4f8229d27279649e3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 71e206f8760ac6a4d9a898405762bd31, type: 2}
